@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.grupo7.proy1.edd.proy1v2.Login">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Departamento"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="332dp"
+        android:layout_above="@+id/txtdep"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empresa"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="227dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/txtcontra"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="114dp"
+        android:layout_below="@+id/txtusu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/txtusu"
+        android:layout_width="215dp"
+        android:layout_height="29dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="57dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
+
+    <EditText
+        android:id="@+id/txtcontra"
+        android:layout_width="213dp"
+        android:layout_height="28dp"
+        android:layout_alignEnd="@+id/txtusu"
+        android:layout_alignRight="@+id/txtusu"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="onClickLogin"
+        android:text="Ingresar"
+        tools:layout_editor_absoluteX="497dp"
+        tools:layout_editor_absoluteY="645dp" />
+
+    <EditText
+        android:id="@+id/txtempre"
+        android:layout_width="213dp"
+        android:layout_height="28dp"
+        android:layout_alignEnd="@+id/txtdep"
+        android:layout_alignRight="@+id/txtdep"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtdep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_above="@+id/btnlogin"
+        android:layout_alignRight="@+id/txtcontra"
+        android:layout_alignEnd="@+id/txtcontra" />
+</RelativeLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.grupo7.proy1.edd.proy1v2.Dev">
+
+    <TextView
+        android:id="@+id/txtdescri"
+        android:layout_width="211dp"
+        android:layout_height="139dp"
+        android:layout_marginBottom="13dp"
+        android:text="Descripción"
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="155dp"
+        android:layout_above="@+id/textView7"
+        android:layout_alignRight="@+id/spiprod"
+        android:layout_alignEnd="@+id/spiprod"
+        android:layout_alignLeft="@+id/spiprod"
+        android:layout_alignStart="@+id/spiprod" />
+
+    <TextView
+        android:id="@+id/txtnombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:text="Nombre"
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="117dp"
+        android:layout_above="@+id/txtdescri"
+        android:layout_alignLeft="@+id/txtdias"
+        android:layout_alignStart="@+id/txtdias" />
+
+    <Spinner
+        android:id="@+id/spiprod"
+        android:layout_width="232dp"
+        android:layout_height="25dp"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="68dp"
+        android:layout_above="@+id/txtnombre"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="61dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="11dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo de renta"
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="313dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/txtdias"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="ID del producto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView7"
+        android:layout_alignEnd="@+id/textView7" />
+
+    <Button
+        android:id="@+id/btndev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:onClick="onClickDev"
+        android:text="Devolver"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="388dp"
+        android:layout_above="@+id/btnmenu"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
+        android:onClick="onClickMenu"
+        android:text="Regresar al Menu"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    <TextView
+        android:id="@+id/txtdias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:text="x Dias"
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        android:layout_above="@+id/btndev"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
