@@ -1,0 +1,105 @@
+Nodo [] raiz
+Nodo [] actual
+int cont =0
+
+InsercionPrincipal(todainfo){
+	Nodo nuevo = new Nodo(todainfo)
+	aux = raiz
+	
+	si raiz = null{
+		raiz = Nodo [5]
+		raiz[0] = nuevo 
+	}
+
+	else{
+		boolean exito = false
+		while(!exito){
+			if(actual[cont]!= null){
+				si nuevo.num < actual[cont].numero{
+					si actual[cont].tiene hijo{
+						InsertarIzq(actual[cont].hijoizq, nuevo)
+						exito = true
+					}
+					else{
+						InsertarSimple(actual, nuevo)
+						exito=true
+					}
+				}
+				en cambio si (nuevo.num == actual[cont].num){
+					InsercionIgual(actual, Posiizq, Posidere, nuevo)
+					exito = true
+				}
+				else{
+					cont ++
+
+				}
+			}
+
+			else{
+				if(cont != 4){
+					InsertarDerecha(actual, nuevo)
+				}
+			}
+		}
+	}
+}
+
+InsertarIzq(matriz, nuevo){
+	cont = 0
+	actual = matriz
+	int lleno =-1
+	for (i=0 hasta 3){
+		if actual[i] != null{
+			lleno++
+		}
+	}
+
+	if lleno == 3{
+		InsertarCompicada(actual, nuevo)
+	}
+
+	else{
+		boolean exito = false
+		while(!exito){
+			if(actual[cont]!= null){
+				si nuevo.num < actual[cont].numero{
+					si actual[cont].tiene hijo{
+						InsertarIzq(actual[cont].hijoizq, nuevo)
+						exito = true
+					}
+					else{
+						InsertarSimple(actual, nuevo)
+						exito=true
+					}
+				}
+				en cambio si (nuevo.num == actual[cont].num){
+					InsercionIgual(actual, Posiizq, Posidere, nuevo)
+					exito = true
+				}
+				else{
+					cont ++
+
+				}
+			}
+
+			else{
+				InsertarDerecha(actual, nuevo)
+			}
+		}
+	}
+}
+
+InsertarSimple(matriz, nuevo){
+	int lleno =-1
+	for (i=0 hasta 3){
+		if actual[i] != null{
+			lleno++
+		}
+	}
+	actual = matriz
+	Nodo aux = actual[cont]
+	actual[cont] = nuevo
+	cont ++
+	actual[cont] = aux
+	cont =0
+}
