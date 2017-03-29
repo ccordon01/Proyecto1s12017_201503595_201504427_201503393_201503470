@@ -1,0 +1,8 @@
+graph {
+	graph [bgcolor="#333333" fontcolor=white fontsize=16 label=Lista rankdir=BT]
+	node [color=white fillcolor="#006699" fontcolor=white fontname=Helvetica shape=doublecircle style=filled]
+	edge [arrowhead=open color=white fontcolor=white fontname=Courier fontsize=12 style=dashed]
+		A
+		B
+			A -- B
+}

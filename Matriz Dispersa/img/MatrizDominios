@@ -1,0 +1,12 @@
+graph {
+	graph [bgcolor="#333333" fontcolor=white fontsize=16 label="Practica 2" nodesep=.05 rankdir=LR splines=line]
+	node [color=white fillcolor="#006699" fontcolor=white fontname=Helvetica nodesep=.05 shape=record style=filled]
+	edge [arrowhead=open color=white fontcolor=white fontname=Courier fontsize=12 style=dashed]
+		h [label="{<n> prueba | dl.com | dla.com | dli.com | dll.com | dzi.com}"]
+		p [label="{<n> data}"]
+		g [label=" <f0> f0|<f1> f1 |f2 |f3 |f4 |f5 |f6 "]
+		p2 [label="<edd> M.D."]
+			p2:edd -- g:f0
+			g:f0 -- h:n
+			h:n -- p:n
+}

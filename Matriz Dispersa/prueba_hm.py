@@ -11,6 +11,9 @@ from listaCola import ClaseListaCola
 from matrizDispersa import ClassMatriz
 import graphviz as gv
 import pygraphviz as pgv
+test = ClaseLista()
+listaPos = ClaseLista()
+test2 = ClaseListaDoble()
 styles = {
     'graph': {
         'label': 'Practica 2',
@@ -245,27 +248,77 @@ def graficarMatriz(l,name):
     #filename = g1.render(filename='img/'+name)
     print A.string() # print dot file to standard output
     A.draw('img/'+name+'.png', prog='dot')
-
+test.insertarAlFrente("hola")
+test.insertarAlFrente("adios")
+test.insertarAlFinal("hi")
+test.insertarAlFinal("ciao")
+test.mostrar()
+print"Nodo 1 " + str(test.primerNodo.datos) 
+test.eliminarDelFrente()
+test.mostrar()
+test.estaVacia() 
+test2.insertarAlFrente("hola")
+test2.insertarAlFrente("adios")
+test2.insertarAlFrente("hi")
+test2.insertarAlFinal("ciao")
+graficarLista(test2,'Lista')
+print test2.byvalue(str("hola"))
+print"Nodo ultimo " + str(test2.ultimoNodo.datos) 
+print"Nodo ultimo anterior " + str(test2.ultimoNodo.nodoAnterior.datos) 
+print "size: " + str(test2.size())
+test2.mostrar()
+#print "Se elimino "+ str(test2.delbyvalue("hola"))
+test2.mostrar()
+print "--Prueba Pila--"
+pila = ClaseListaPila()
+pila.push("1")
+pila.push("2")
+pila.push("3")
+pila.push("4")
+pila.push("5")
+graficarListaE(pila,'Pila')
+pila.mostrar()
+print "--Prueba Cola--"
+cola = ClaseListaCola()
+cola.enqueue("1")
+cola.enqueue("2")
+cola.enqueue("3")
+cola.enqueue("4")
+cola.enqueue("5")
+graficarListaE(cola,'Cola')
+cola.mostrar()
+print "--Matriz Dispersa--Cabecera--"
+matriz = ClassMatriz()
+print matriz.insertarCabeceraLetras("c")
+print matriz.insertarCabeceraLetras("a")
+print matriz.insertarCabeceraLetras("b")
+print matriz.insertarCabeceraLetras("d")
+print matriz.insertarCabeceraLetras("d")
+print matriz.insertarCabeceraLetras("x")
+print "--Inicio Cabecera Letras--"
+matriz.mostrarCabeceraLetras()
+print "--Matriz Dispersa--Dominios--"
+#print matriz.insertarCabeceraDominios("car.com")
+#print matriz.insertarCabeceraDominios("all.com")
+#print matriz.insertarCabeceraDominios("bee.com")
+print matriz.insertarCabeceraDominios("dzi.com")
+print matriz.insertarCabeceraDominios("dll.com")
+print matriz.insertarCabeceraDominios("dla.com")
+print matriz.insertarCabeceraDominios("dli.com")
+print matriz.insertarCabeceraDominios("dl.com")
+#print matriz.insertarCabeceraDominios("xfg.com")
+print "--Inicio Cabecera Dominios--"
+matriz.mostrarCabeceraDominios()
+#graficarCabeceraD(matriz,'MatrizDominios')
 print "--Inicio Matriz Dispersa--"
 matrizD = ClassMatriz()
 print matrizD.insertarCorreo("Seguros","EmpresaA")
 print matrizD.insertarCorreo("Ventas","EmpresaB")
-print matrizD.insertarCorreo("Atencion","EmpresaB")
 print matrizD.insertarCorreo("Atencion","EmpresaC")
 
 graficarMatriz(matrizD,'MatrizD')
-print "--Insertar Usuarios--"
-print matrizD.insertarDatos("Seguros","EmpresaA","carlos",12345)
-print "------------------------"
-print matrizD.insertarDatos("Ventas","EmpresaB","chino",12345)
-print "------------------------"
-print matrizD.insertarDatos("Atencion","EmpresaC","claus",12345)
-print "------------------------"
-print matrizD.insertarDatos("Seguros","EmpresaA","juanpa",12345)
-print "------------------------"
-print matrizD.insertarDatos("Atencion","EmpresaB","panqueque",12345)
-print "------------------------"
 """
+print matrizD.insertarDatos("carlos","gmail")
 print matrizD.insertarDatos("carlos","hotmail")
 print matrizD.insertarDatos("diego","hotmail")
 print matrizD.insertarCorreo("cech","hotmail")
@@ -287,35 +340,8 @@ print matrizD.insertarDatos("rech","gmail")
 print matrizD.insertarCorreo("rech","hotmail")
 print matrizD.insertarDatos("rech","hotmail")
 """
-print "--Inicio Cabecera Letras--"
+"""print "--Inicio Cabecera Letras--"
 matrizD.mostrarCabeceraLetras()
-print "--Inicio Cabecera Dominios--"
-matrizD.mostrarCabeceraDominios()
-print "--Inicio Cabecera Dominios Busqueda--"
-print matrizD.findbyd("EmpresaB")
-print "--Inicio Cabecera Letras Busqueda--"
-print matrizD.findbyl("Atencion")
-print "--Inicio Login--"
-print matrizD.login("Seguros","EmpresaA","carlos",12345)
-print matrizD.login("Atencion","EmpresaB","panqueque",12345)
-print "----------------------------------------------------------"
-print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","1","bonitos zapatos","A65A19E23Q104A4")
-print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","5","bonitos blusas","I47D83A17J22T27")
-print matrizD.insertarAvl("Seguros","EmpresaA","carlos","2","bonitos zapatos","A65A19E23Q104A42")
-print matrizD.insertarAvl("Seguros","EmpresaA","carlos","2","bonitos blusas","I47D83A17J22T273")
-print "----------------------------------------------------------"
-#matrizD.mostrarAvl("Atencion","EmpresaB","panqueque")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-print "------------------------"
-print matrizD.rentarAVL("carlos","I47D83A17J22T27","3")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-print "------------------------"
-print matrizD.devolverAVL("I47D83A17J22T27")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-"""
 graficarMatriz(matrizD,'MatrizD')
 print "--Inicio Cabecera Dominios--"
 matrizD.mostrarCabeceraDominios()

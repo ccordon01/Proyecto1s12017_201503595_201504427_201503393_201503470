@@ -5,7 +5,9 @@ import sys
 sys.path.append('./')
 #Importo la Clase
 from nodos import Claseuno
-from flask import Flask, request, Response
+from flask import Flask, request, Response,jsonify,json
+from nodoAvl import nodoAvl
+import names
 from matrizDispersa import ClassMatriz
 app = Flask("EDD_Grupo7")
 matrizD = ClassMatriz()
@@ -35,10 +37,40 @@ def helloSimulacion():
      print matrizD.insertarDatos("Seguros","EmpresaA","juanpa",12345)
      print "------------------------"
      print matrizD.insertarDatos("Atencion","EmpresaB","panqueque",12345)
-     print "------------------------"
+     print "----------------------------------------------------------"
+     print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","1","bonitos zapatos","A65A19E23Q104A4")
+     print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","5","bonitos blusas","I47D83A17J22T27")
+     print matrizD.insertarAvl("Seguros","EmpresaA","carlos","1","bonitos zapatos","A65A19E23Q104A4")
+     print matrizD.insertarAvl("Seguros","EmpresaA","carlos","5","bonitos blusas","I47D83A17J22T27")
+     print "----------------------------------------------------------"
+     print matrizD.mostrarAvlG()
      return "Datos Cargados"
 
+@app.route('/json',methods=['POST']) 
+def helloJson():
+    jsonStr = None
+    try:
 
+        # Initialize a employee list
+        avlList = []
+
+        # create a instances for filling up employee list
+        for i in range(0,5):
+            employee = nodoAvl(names.get_first_name(),names.get_last_name(),str(i))
+            avlList.append(employee)
+        print "hola"
+    # convert to json data
+        jsonStr = json.dumps([e.toJSON() for e in avlList])
+        #return jsonStr
+        print jsonStr
+    except:
+        print "error ", sys.exc_info()[0]
+
+    return jsonStr
+    
+@app.route('/activos',methods=['POST']) 
+def helloActivos():
+     return matrizD.mostrarAvlG()
 
 
 
@@ -90,7 +122,8 @@ def hellof():
      return "Hello World :)!"
 #if __name__ == "__main__":
 app.run(debug=True, host='192.168.1.237')
-
+#app.run(debug=True)
+#app.run(debug=True, host='192.168.43.99')
 #################################/
 #                               #/
 #   Carlos Eduardo Cordon Hdez  #/

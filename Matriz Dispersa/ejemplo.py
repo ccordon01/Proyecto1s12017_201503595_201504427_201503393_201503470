@@ -1,7 +1,30 @@
+__author__ = "Carlangas"
+
+#Si mientras trabajan en Python alguna vez les arroja un "IndentationError" es porque en alguna linea, los tabs al inicio de la sentencia estan erroneos, por ejemplo:
+#Esto es valido:
+#class Usuario():
+#    def __init__(self, nombre):
+#        self.nombre = nombre
+#        self.password = password
+#Esto NO es valido y arroja un "IndentationError":
+#class Usuario():
+#    def __init__(self, nombre):
+#        self.nombre = nombre
+#       self.password = password
+#       ^
+#       Esto no deberia de estar ahi, sino que tiene que estar igual de indentado que las demas sentencias.
+#
+#
+#Recomiendo Sublime Text como IDE
+#
+
+
 import sys
 #Anexo el Directorio en donde se encuentra la clase a llamar
 sys.path.append('./')
 #Importo la Clase
+#from nodos import Claseuno
+from flask import Flask, request, Response
 from nodos import Claseuno
 from nodos import Clasedos
 from lista import ClaseLista
@@ -9,8 +32,16 @@ from lista import ClaseListaDoble
 from listaPila import ClaseListaPila
 from listaCola import ClaseListaCola
 from matrizDispersa import ClassMatriz
+app = Flask("Practica 2")
+lista = ClaseListaDoble()
+pila = ClaseListaPila()
+cola = ClaseListaCola()
+matriz = ClassMatriz()
 import graphviz as gv
 import pygraphviz as pgv
+test = ClaseLista()
+listaPos = ClaseLista()
+test2 = ClaseListaDoble()
 styles = {
     'graph': {
         'label': 'Practica 2',
@@ -40,17 +71,17 @@ styles = {
     }
 }
 class ClassDD(object):
-	"""docstring for ClassName"""
-	def __init__(self, datos,nodo):
-     	 self.datos = datos
-     	 self.nodo = nodo
+    """docstring for ClassName"""
+    def __init__(self, datos,nodo):
+         self.datos = datos
+         self.nodo = nodo
 def pos(correo):
-	#actual = nsM.nodoSiguiente
+    #actual = nsM.nodoSiguiente
          actual = listaPos.primerNodo
          while (actual != None):
-	 	 	if actual.datos.datos == correo:
-	 	 		return actual.datos.nodo
-	 	 	actual = actual.nodo
+            if actual.datos.datos == correo:
+                return actual.datos.nodo
+            actual = actual.nodo
 def apply_styles(graph, styles):
     graph.graph_attr.update(
         ('graph' in styles and styles['graph']) or {}
@@ -77,9 +108,9 @@ def graficarLista(l,name):
     contador = 0
     actual = l.primerNodo
     while (actual != None):
-    	    tmp = contador + 1
-    	    if not tmp==aux:
-    	      g1.edge(str(aux-contador-1),str(aux-tmp-1))
+            tmp = contador + 1
+            if not tmp==aux:
+              g1.edge(str(aux-contador-1),str(aux-tmp-1))
               #print "Dato: " + actual.datos
             contador = contador + 1
             actual = actual.nodoSiguiente
@@ -87,7 +118,7 @@ def graficarLista(l,name):
     #g1.edge('A', 'A')
     print(g1.source)
     g1 = apply_styles(g1, styles)
-    filename = g1.render(filename='img/'+name)
+    filename = g1.render(filename='imgen/'+name)
     print filename
 def graficarListaE(l,name):
     g1 = gv.Graph(format='png')
@@ -104,9 +135,9 @@ def graficarListaE(l,name):
     contador = 0
     actual = l.primerNodo
     while (actual != None):
-    	    tmp = contador + 1
-    	    if not tmp==aux:
-    	      g1.edge(str(aux-contador-1),str(aux-tmp-1))
+            tmp = contador + 1
+            if not tmp==aux:
+              g1.edge(str(aux-contador-1),str(aux-tmp-1))
               #print "Dato: " + actual.datos
             contador = contador + 1
             actual = actual.nodo
@@ -114,13 +145,13 @@ def graficarListaE(l,name):
     #g1.edge('A', 'A')
     print(g1.source)
     g1 = apply_styles(g1, styles)
-    filename = g1.render(filename='img/'+name)
+    filename = g1.render(filename='imgen/'+name)
     print filename
 def graficarMatriz(l,name):
     A=pgv.AGraph(directed=True,strict=True,rankdir='LR',splines='ortho',shape = 'record')
 # add some edges
     A.node_attr['shape']='box'
-    A.add_node(0,label = "")
+    A.add_node(0,label = "M. D.")
     B=A.add_subgraph([0],name='s1',rank='same')
     B.graph_attr['rank']='same'
     actual = l.primerNodo.nodoInferior
@@ -184,7 +215,7 @@ def graficarMatriz(l,name):
     contador = contadorAux
     actual = l.primerNodo.nodoSiguiente
     n=1
-    """while (actual != None):
+    while (actual != None):
             tmp = contador 
             print str(tmp) + "=" + str(aux)
             if not tmp==(aux):
@@ -238,101 +269,123 @@ def graficarMatriz(l,name):
                          actualm = actualm.nodoSiguiente
                  contador = contador + 1
                  actual = actual.nodoInferior
-    """
     #g1.edge('A', 'A')
     #print(g1.source)
     #g1 = apply_styles(g1, styles)
     #filename = g1.render(filename='img/'+name)
     print A.string() # print dot file to standard output
-    A.draw('img/'+name+'.png', prog='dot')
+    A.draw('imgen/'+name+'.png', prog='dot')
+@app.route('/prueba',methods=['POST']) 
+def h1i():
+    #return "hola"
+    parametro = str(request.form['dato'])
+    ##self.lista.insertarAlFinal(parametro);
+    return "Se inicio correctamente " + str(parametro) + "!"
+@app.route('/insertarLista',methods=['POST']) 
+def h1():
+    parametro = str(request.form['dato'])
+    lista.insertarAlFinal(str(parametro))
+    graficarLista(lista,'Lista')
+    return "Se inserto correctamente " + str(parametro) + "!"
+@app.route('/borrarLista',methods=['POST']) 
+def h11():
+    parametro = str(request.form['dato'])
+    print "borrar "+parametro
+    lista.mostrar()
+    valor = lista.delbypos(parametro)
+    graficarLista(lista,'Lista')
+    if valor is "null":
+        return "No se encontro dato"
+    return "Se elimino correctamente " + str(valor) + "!"
+@app.route('/buscarLista',methods=['POST']) 
+def h111():
+    parametro = str(request.form['dato'])
+    valor = lista.byvalue(parametro)
+    if valor == "null":
+        return "No se encontro dato"
+    return "Se encontro correctamente en pos: " + str(valor) + "!"
+@app.route('/insertarMatriz',methods=['POST']) 
+def h14():
+    parametro = str(request.form['dato'])
+    dato = str(request.form['dato2'])
+    print matriz.insertarCorreo(parametro,dato)
+    print matriz.insertarDatos(parametro,dato)
+    print "--Inicio Cabecera Letras--"
+    matriz.mostrarCabeceraLetras()
+    print "--Inicio Cabecera Dominios--"
+    matriz.mostrarCabeceraDominios()
+    graficarMatriz(matriz,'MatrizD')
+    return "Se inserto correctamente " + str(parametro) +"@"+ str(dato)+ "!"
+@app.route('/borrarMatriz',methods=['POST']) 
+def h114():
+    parametro = str(request.form['dato'])
+    print "borrar "+parametro
+    parametro = str(request.form['dato'])
+    dato = str(request.form['dato2'])
+    valor = matriz.borrarDatos(parametro,dato)
+    graficarMatriz(matriz,'MatrizD')
+    if valor is "null":
+        return "No se encontro dato"
+    return "Se elimino correctamente " + str(valor) + "!"
+@app.route('/buscarMatrizL',methods=['POST']) 
+def h1114():
+    parametro = str(request.form['dato'])
+    valor = matriz.findbyl(str(parametro))
+    if valor == "null":
+        return "No se encontro dato"
+    return str(valor)
+@app.route('/buscarMatrizD',methods=['POST']) 
+def h11145():
+    parametro = str(request.form['dato'])
+    valor = matriz.findbyd(str(parametro))
+    if valor == "null":
+        return "No se encontro dato"
+    return str(valor)
+@app.route('/insertarPila',methods=['POST']) 
+def h12():
+    parametro = str(request.form['dato'])
+    pila.push(parametro);
+    graficarListaE(pila,'Pila')
+    return "Se inserto correctamente " + str(parametro) + "!"
+@app.route('/borrarPila',methods=['POST']) 
+def h112():
+    #parametro = str(request.form['dato'])
+    valor = pila.pop()
+    graficarListaE(pila,'Pila')
+    return "Se elimino correctamente " + str(valor) + "!"
+@app.route('/insertarCola',methods=['POST']) 
+def h13():
+    parametro = str(request.form['dato'])
+    cola.enqueue(parametro);
+    graficarListaE(cola,'Cola')
+    return "Se inserto correctamente " + str(parametro) + "!"
+@app.route('/borrarCola',methods=['POST']) 
+def h113():
+    #parametro = str(request.form['dato'])
+    valor = cola.dequeue()
+    graficarListaE(cola,'Cola')
+    return "Se elimino correctamente " + str(valor) + "!"
+@app.route('/metodoWeb',methods=['POST']) 
+def hello():
+    parametro = str(request.form['dato'])
+    dato2 = str(request.form['dato2'])
+    return "Hola " + str(parametro) + "!"
+@app.route('/metodoWeb1',methods=['POST']) 
+def helloq():
+    return "Hola mundo !"
 
-print "--Inicio Matriz Dispersa--"
-matrizD = ClassMatriz()
-print matrizD.insertarCorreo("Seguros","EmpresaA")
-print matrizD.insertarCorreo("Ventas","EmpresaB")
-print matrizD.insertarCorreo("Atencion","EmpresaB")
-print matrizD.insertarCorreo("Atencion","EmpresaC")
+@app.route("/e")
+def hellof():
+    return "Hello World2!"
+def function():
+    pass
+if __name__ == "__main__":
+  app.run(debug=True, host='0.0.0.0')
 
-graficarMatriz(matrizD,'MatrizD')
-print "--Insertar Usuarios--"
-print matrizD.insertarDatos("Seguros","EmpresaA","carlos",12345)
-print "------------------------"
-print matrizD.insertarDatos("Ventas","EmpresaB","chino",12345)
-print "------------------------"
-print matrizD.insertarDatos("Atencion","EmpresaC","claus",12345)
-print "------------------------"
-print matrizD.insertarDatos("Seguros","EmpresaA","juanpa",12345)
-print "------------------------"
-print matrizD.insertarDatos("Atencion","EmpresaB","panqueque",12345)
-print "------------------------"
-"""
-print matrizD.insertarDatos("carlos","hotmail")
-print matrizD.insertarDatos("diego","hotmail")
-print matrizD.insertarCorreo("cech","hotmail")
-print matrizD.insertarDatos("cech","hotmail")
-print matrizD.insertarCorreo("fech","fotmail")
-print matrizD.insertarDatos("fech","fotmail")
-print matrizD.insertarCorreo("fech","hotmail")
-print matrizD.insertarDatos("fech","hotmail")
-print matrizD.insertarCorreo("rech","rotmail")
-print matrizD.insertarDatos("rech","rotmail")
-print matrizD.insertarCorreo("cech","rotmail")
-print matrizD.insertarDatos("cech","rotmail")
-print matrizD.insertarCorreo("yech","yotmail")
-print matrizD.insertarDatos("yech","yotmail")
-print matrizD.insertarCorreo("rech","fotmail")
-print matrizD.insertarDatos("rech","fotmail")
-print matrizD.insertarCorreo("rech","gmail")
-print matrizD.insertarDatos("rech","gmail")
-print matrizD.insertarCorreo("rech","hotmail")
-print matrizD.insertarDatos("rech","hotmail")
-"""
-print "--Inicio Cabecera Letras--"
-matrizD.mostrarCabeceraLetras()
-print "--Inicio Cabecera Dominios--"
-matrizD.mostrarCabeceraDominios()
-print "--Inicio Cabecera Dominios Busqueda--"
-print matrizD.findbyd("EmpresaB")
-print "--Inicio Cabecera Letras Busqueda--"
-print matrizD.findbyl("Atencion")
-print "--Inicio Login--"
-print matrizD.login("Seguros","EmpresaA","carlos",12345)
-print matrizD.login("Atencion","EmpresaB","panqueque",12345)
-print "----------------------------------------------------------"
-print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","1","bonitos zapatos","A65A19E23Q104A4")
-print matrizD.insertarAvl("Atencion","EmpresaB","panqueque","5","bonitos blusas","I47D83A17J22T27")
-print matrizD.insertarAvl("Seguros","EmpresaA","carlos","2","bonitos zapatos","A65A19E23Q104A42")
-print matrizD.insertarAvl("Seguros","EmpresaA","carlos","2","bonitos blusas","I47D83A17J22T273")
-print "----------------------------------------------------------"
-#matrizD.mostrarAvl("Atencion","EmpresaB","panqueque")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-print "------------------------"
-print matrizD.rentarAVL("carlos","I47D83A17J22T27","3")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-print "------------------------"
-print matrizD.devolverAVL("I47D83A17J22T27")
-print "----------------------------------------------------------"
-matrizD.mostrarAvlG("carlos")
-"""
-graficarMatriz(matrizD,'MatrizD')
-print "--Inicio Cabecera Dominios--"
-matrizD.mostrarCabeceraDominios()
-print "--Inicio Cabecera Letras--"
-print matrizD.findbyl("c")
-print "--Inicio Cabecera Dominios--"
-print matrizD.findbyd("hotmail")
-print matrizD.borrarDatos("carlos","hotmail")
-print "--Inicio Cabecera Letras--"
-print matrizD.findbyl("c")
-print "--Inicio Cabecera Dominios--"
-print matrizD.findbyd("hotmail")
-"""
-#print "Hola Mundo"
-#hi= "hi"
-#print hi[1]
-#print len(hi)
-#print len(".")
-#Claseuno();
-#Clasedos();
+#################################/
+#                               #/
+#   Carlos Eduardo Cordon Hdez  #/
+#                               #/
+#          201504427            #/
+#                               #/
+#################################/

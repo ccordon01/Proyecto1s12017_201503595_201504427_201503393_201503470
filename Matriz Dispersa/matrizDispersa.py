@@ -8,7 +8,10 @@ from nodos import Clasetres
 from nodos import Clasecuatro
 from nodos import Clasecinco
 from lista import ClaseListaDoble
-
+from ArbolAVL import Arbol
+from NodoArbolAVL import NodoArbol
+from flask import Flask, request, Response,jsonify,json
+datosAVL=[]
 class ClassMatriz(Clasetres):
     """docstring for ClassName"""
     def __init__(self):
@@ -301,7 +304,7 @@ class ClassMatriz(Clasetres):
                   text = ""
                   while (actualM != None):
                        if actualM.datos.usuario == user:
-                         if actualM.datos.passw == password:
+                         if str(actualM.datos.passw) == str(password):
                            return "Bienvenido "+ user
                          else:
                            return "Contrasena incorrecta"
@@ -309,3 +312,90 @@ class ClassMatriz(Clasetres):
                   return "Usuario incorrecto"
                actual = actual.nodoSiguiente
          return "No existe empresa"
+
+    def insertarAvl(self,name,dominio,user,nombre,descripcion,idn):
+         NodoLetra = self.nodoL(name)
+         if NodoLetra == None:
+           return "Departamento no existe"
+         actual = NodoLetra.nodoSiguiente
+         while (actual != None):
+               #text =text + actual.datos.lista.mostrarc()
+               if actual.datos.correo == dominio:
+                  actualM = actual.datos.lista.primerNodo
+                  text = ""
+                  while (actualM != None):
+                       if actualM.datos.usuario == user:
+                        return actualM.datos.nodoAvl.Insertar(nombre,descripcion,idn)
+                       actualM = actualM.nodoSiguiente
+                  return "Usuario incorrecto"
+               actual = actual.nodoSiguiente
+         return "No existe empresa"
+
+    def mostrarAvl(self,name,dominio,user):
+         NodoLetra = self.nodoL(name)
+         if NodoLetra == None:
+           return "Departamento no existe"
+         actual = NodoLetra.nodoSiguiente
+         while (actual != None):
+               #text =text + actual.datos.lista.mostrarc()
+               if actual.datos.correo == dominio:
+                  actualM = actual.datos.lista.primerNodo
+                  text = ""
+                  while (actualM != None):
+                       if actualM.datos.usuario == user:
+                        actualM.datos.nodoAvl.preOrden(actualM.datos.nodoAvl.obtenerRaiz())
+                       actualM = actualM.nodoSiguiente
+                  return "Usuario incorrecto"
+               actual = actual.nodoSiguiente
+         return "No existe empresa"
+
+    def mostrarAvlG(self,user):
+         del datosAVL[:]
+         NodoLetra = self.primerNodo.nodoInferior
+         while (NodoLetra != None):
+             actual = NodoLetra.nodoSiguiente
+             while (actual != None):
+                  actualM = actual.datos.lista.primerNodo
+                  while (actualM != None):
+                      if actualM.datos.usuario != user:
+                        tempAVL=actualM.datos.nodoAvl.getAll()
+                        for x in tempAVL:
+                          print "inserto"
+                          datosAVL.append(x)
+                        del tempAVL[:]
+                      actualM = actualM.nodoSiguiente
+                  actual = actual.nodoSiguiente
+             NodoLetra = NodoLetra.nodoInferior
+         jsonStr = json.dumps([e.toJSON() for e in datosAVL])
+         print "----------------------------------------------------------"
+         return jsonStr 
+
+    def rentarAVL(self,us,idp,dias):
+         NodoLetra = self.primerNodo.nodoInferior
+         while (NodoLetra != None):
+             actual = NodoLetra.nodoSiguiente
+             while (actual != None):
+                  actualM = actual.datos.lista.primerNodo
+                  while (actualM != None):
+                        if str(actualM.datos.nodoAvl.buscaR(us,idp,dias,actualM.datos.nodoAvl.obtenerRaiz())) != str("None"):
+                          return "Renta Realizada Con Exito"
+                        actualM = actualM.nodoSiguiente
+                  actual = actual.nodoSiguiente
+             NodoLetra = NodoLetra.nodoInferior
+         return "Renta Realizada Con Exito"
+
+    def devolverAVL(self,idp):
+         NodoLetra = self.primerNodo.nodoInferior
+         while (NodoLetra != None):
+             actual = NodoLetra.nodoSiguiente
+             while (actual != None):
+                  actualM = actual.datos.lista.primerNodo
+                  while (actualM != None):
+                        if str(actualM.datos.nodoAvl.devolverR(idp,actualM.datos.nodoAvl.obtenerRaiz())) != str("None"):
+                          return "Devolucion Realizada Con Exito"
+                        actualM = actualM.nodoSiguiente
+                  actual = actual.nodoSiguiente
+             NodoLetra = NodoLetra.nodoInferior
+         return "Devolucion Realizada Con Exito"
+
+
